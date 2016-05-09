@@ -168,7 +168,7 @@ if let url3 = NSURL(string: "http://www.baidu.com/"){
 
 
 
-// 演练3
+// 练习
 var name : String?
 print(name?.lengthOfBytesUsingEncoding(NSUTF8StringEncoding))
 
@@ -321,7 +321,7 @@ arrayM3.capacity  // 容量为 4*2 = 8
 var arrayM4: [String] //定义只能保存字符串类型数组
 arrayM4 = [String]() //初始化
 // 数组没有初始化之前不允许做任何操作
-arrayM4.append("lnj")
+arrayM4.append("apple")
 print(arrayM4)
 
 /*
@@ -426,7 +426,7 @@ var str2 = "cool"
 str2 += str
 
 let age = 30
-let name1 = "lnj"
+let name1 = "developer"
 // 直接在 "" 中使用 \(变量名) 的方式可以快速拼接字符串
 let str3 = "name = \(name1), age = \(age)"
 let totalStr = String (format: "%2d:%2d:%2d", arguments: [1,24,26])
