@@ -27,12 +27,12 @@ class ViewController: UIViewController {
         
         // 2.闭包的简单用法
         testClosure1 { () -> () in
-            print("执行回调testClosure \(__LINE__)")
+            print("执行回调testClosure \(#line)")
         }
         
         
         testClosure2("testName") { (name) -> () in
-            print("执行回调testClosure1 \(__LINE__), 参数name = \(name)")
+            print("执行回调testClosure1 \(#line), 参数name = \(name)")
         }
         
         
