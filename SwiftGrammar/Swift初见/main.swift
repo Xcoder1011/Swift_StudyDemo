@@ -15,10 +15,12 @@ var myVariable = 42
 myVariable = 50
 let myConstant = 42
 
+
 // 2.不用明确地声明类型，声明的同时赋值的话，编译器会自动推断类型
 // 3.如果初始值没有提供足够的信息（或者没有初始值），那你需要在变量后面声明类型，用冒号分割。
 let value1 : Double = 70
 print(value1)   // 70.0
+
 
 // 4.值永远不会被隐式转换为其他类型。如果你需要把一个值转换成其他类型，请显式转换。
 let label = "The width is "
@@ -26,6 +28,7 @@ let width = 94
 let total1 = label + String(width)
 let total2 = label + "\(width+1)"
 print("\(total1) , \(total2)")    // The width is 94 , The width is 95
+
 
 // 5.使用方括号[]来创建数组和字典，并使用下标或者键（key）来访问元素。最后一个元素后面允许有个逗号。
 var shoppingList = ["apple","orange","banana"]
@@ -37,9 +40,11 @@ var jsonDict = [
 ]
 print(jsonDict["errorMessage"])
 
+
 // 5.1要创建一个空数组或者字典，使用初始化语法。
 let emptyArray = [String]()
 let emptyDict = [String : Float]()
+
 
 // 5.2如果类型信息可以被推断出来，你可以用[]和[:]来创建空数组和空字典
 shoppingList = []
@@ -195,9 +200,32 @@ print("increment(5) = \(increment(5))") //increment(5) = 6
 
 
 // 5.函数也可以当做参数传入另一个函数
+func hasSmallNum(numArray:[Int] , condition: Int -> Bool) -> Bool {
+    for num in numArray {
+        if condition(num) {
+            return true
+        }
+    }
+    return false
+}
+
+func lessThanTen(num: Int) -> Bool {
+    return num < 10
+}
+
+var numbers = [12, 8, 3, 45, 23]
+//lessThanTen函数 当做 参数 传入 hasSmallNum函数 ！！！
+hasSmallNum(numbers, condition: lessThanTen)
 
 
 
+
+let mappedNumbers = numbers.map({
+    (number: Int) -> Int in
+    let result = 3 * number
+    return result
+})
+print(mappedNumbers) // [36, 24, 9, 135, 69]
 
 
 
