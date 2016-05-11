@@ -375,17 +375,79 @@ print("badStu score is \(badScore)") //badStu score is Optional(59.0)
 
 
 
-
 // ----------------------枚举和结构体（Enumerations and Structures）----------------
 
+// 1.使用enum来创建一个枚举 , 枚举可以包含方法
+enum Rank:Int {
+    // 默认情况下，Swift 按照从 0 开始每次加 1 的方式为原始值进行赋值，
+    // 不过也可以通过显式赋值进行改变
+    case Ace = 1 // Ace被显式赋值为 1 , 并且剩下的原始值会按照顺序赋值
+    case Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten
+    case Jack, Queen, King
+    
+    func simpleDescription() -> String {
+        switch self {
+        case .Ace:
+            return "这是扑克牌里的A"
+        case .Jack:
+            return "这是扑克牌里的J"
+        case .Queen:
+            return "这是扑克牌里的Q"
+        case .King:
+            return "这是扑克牌里的K"
+        default:
+            return String(self.rawValue)
+        }
+    }
+}
+let A = Rank.Ace
+let aceValue = A.rawValue  // 1
+print("aceValue is \(aceValue)")  //aceValue is 1
 
 
+// 2.使用rawValue属性来访问一个枚举成员的原始值
+if let convertRank = Rank(rawValue: 13) {
+    let threeteenDes = convertRank.simpleDescription()
+    print(threeteenDes)  // 这是扑克牌里的K
+    
+    //枚举的成员值是实际值，并不是原始值的另一种表达方法
+    let TwoDes = Rank.Two.simpleDescription()
+    print(TwoDes)  // 2
+}
 
 
+// 3. 使用 struct 来创建一个 结构体
+struct Card {
+    var rank : Rank
+    func simpleDescription() -> String {
+        return "请出牌：\(rank.simpleDescription())"
+    }
+}
+let sixCard = Card(rank: .Six)
+print(sixCard.simpleDescription())  // 请出牌：6
+/*
+ * 结构体和类有很多相同的地方，比如方法和构造器
+ * 它们之间最大的一个区别就是 结构体是传值 ，类是传引用
+ */
 
 
+// 4. 相同枚举成员的实例可以有不同的值
+enum ServerResponse {
+    case Result(String, String)
+    case Failure(String)
+}
 
+let success = ServerResponse.Result("6:00 am", "8:09 pm")
+let failure = ServerResponse.Failure("Out of cheese.")
 
+switch success {
+case let .Result(sunrise, sunset):
+    let serverResponse = "Sunrise is at \(sunrise) and sunset is at \(sunset)."
+    print("serverResponse...\(serverResponse)") //serverResponse...Sunrise is at 6:00 am and sunset is at 8:09 pm.
+    
+case let .Failure(message):
+    print("Failure...  \(message)")
+}
 
 
 
