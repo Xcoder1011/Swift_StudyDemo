@@ -178,7 +178,7 @@ sumof(2,3,4,6)
 func returnFifteen() -> Int {
     var  y = 10
     func add(){
-        //被嵌套的函数可以访问外侧函数的变量y，
+        //被嵌套的函数可以访问外侧函数的变量y
         y += 5
     }
     add()
@@ -218,9 +218,9 @@ var numbers = [12, 8, 3, 45, 23]
 hasSmallNum(numbers, condition: lessThanTen)
 
 
-
-
+// 6.函数实际上是一种特殊的闭包:它是一段能之后被调取的代码
 let mappedNumbers = numbers.map({
+    // 可以使用{}来创建一个匿名闭包。使用in将参数和返回值类型声明与闭包函数体进行分离
     (number: Int) -> Int in
     let result = 3 * number
     return result
@@ -228,27 +228,167 @@ let mappedNumbers = numbers.map({
 print(mappedNumbers) // [36, 24, 9, 135, 69]
 
 
+// 6.1 如果一个闭包的类型已知，比如作为一个回调函数,
+// 可以忽略参数的类型和返回值。单个语句闭包会把它语句的值当做结果返回。
+let mapNumbers = numbers.map({num in num * 3})
+print(mapNumbers)  //[36, 24, 9, 135, 69]
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// 6.2 对数组里的元素从小到大排序
+// 当一个闭包是传给函数的唯一参数，可以完全忽略括号
+let sortedNumbers = numbers.sort{ $0 < $1}
+print(sortedNumbers)
 
 
 
 // ----------------------对象和类（Objects and Classes）----------------
+
+// 1.使用class和类名来创建一个类
+// 创建类的时候可以忽略父类
+class People {
+    var age :Int = 0 // 申明实例变量
+    var name : String
+    
+    // 一个构造函数来初始化类实例。使用init来创建一个构造器
+    init (name : String) {  //通过构造器属性赋值
+      self.name = name
+    }
+    
+    //如果你需要在删除对象之前进行一些清理工作，使用deinit创建一个析构函数。
+    
+    func readName() -> String {
+        return "people Name : \(self.name)"
+    }
+}
+
+// 2.要创建一个类的实例，在类名后面加上括号
+var people = People(name : "")
+people.age = 18
+people.name = "wushangkun"
+// 使用点语法来访问实例的属性和方法。
+var name = people.readName()
+print(name)  //people Name : wushangkun
+
+
+// 3.子类的定义方法是在它们的类名后面加上父类的名字，用冒号分割
+class Student : People {
+
+    var school : String
+    var score : Double
+    
+    init(score: Double , school: String, name:String) {
+        self.score = score
+        self.school = school
+        super.init(name: name)
+    }
+    
+    func readSchool(school:String) -> String {
+        return "student school: \(school)"
+    }
+    //子类如果要重写父类的方法的话，需要用override标记
+    override func readName() -> String {
+    return "student Name : \(self.name)"
+    }
+}
+
+let testStu = Student(score: 9.0 , school: "FUDAN" , name: "zhangsan")
+print( testStu.school )  //FUDAN
+print( testStu.readSchool("QINGHUA") )  //student school: QINGHUA
+print( testStu.readName() ) //student Name : zhangsan
+
+
+// 4.函数除了储存简单的属性之外，属性可以有 getter 和 setter
+// GoodStudent类的构造器执行了三步:
+/*
+ * 4.1 设置子类声明的属性值
+ * 4.2 调用父类的构造器
+ * 4.3 改变父类定义的属性值。其他的工作比如调用方法、getters和setters也可以在这个阶段完成。
+ */
+class GoodStudent : People {
+    
+    var  mathScore : Double
+    var  physicScore : Double
+    var  score : Double
+
+    init(mathScore: Double, physicScore:Double, name: String ,score:Double) {
+        self.mathScore = mathScore
+        self.physicScore = physicScore
+        self.score = score
+        super.init(name: name)
+    }
+    // 属性: 平均成绩
+    var averageScore : Double {
+        get {
+            return (mathScore + physicScore)/2
+        }
+        set {
+            mathScore = newValue
+            physicScore = newValue
+        }
+    }
+}
+
+let testGood = GoodStudent(mathScore: 96,physicScore: 97,name: "lisi" ,score: 88)
+// get
+print("\(testGood.name).averageScore is \(testGood.averageScore)") //lisi.averageScore is 96.5
+// set
+testGood.averageScore = 50
+print("\(testGood.name).physicScore is \(testGood.physicScore)") //lisi.physicScore is 50.0
+
+
+
+// 5.如果不需要计算属性，但是仍然需要在设置一个新值之前或者之后运行代码，使用 willSet 和 didSet
+class WinnerStudent {
+    
+    var  stu : Student {
+        willSet {
+            stu.score = newValue.score
+        }
+    }
+    
+    var goodStu : GoodStudent {
+        willSet {
+            goodStu.score = newValue.score
+        }
+    }
+    init(score: Double , school: String, name:String) {
+        stu = Student(score: score, school: school, name: name)
+        goodStu = GoodStudent(mathScore: score+1, physicScore: score-1, name: name, score: score)
+    }
+}
+
+var winnerStudent = WinnerStudent(score: 100, school: "JIAODA", name: "wangwu")
+// get
+print("winnerStudent.stu.score is \(winnerStudent.stu.score)") //winnerStudent.stu.score is 100.0
+print("winnerStudent.goodStu.score is \(winnerStudent.goodStu.score)") //winnerStudent.goodStu.score is 100.0
+
+// set
+winnerStudent.stu = Student(score: 99, school: "JIAODA1", name: "wangwu1")
+print("winnerStudent.goodStu.score is \(winnerStudent.goodStu.score)") //winnerStudent.goodStu.score is 100.0
+
+
+// 6.处理变量的可选值时，可以在操作（比如方法、属性和子脚本）之前加?
+// 如果?之前的值是nil，?后面的东西都会被忽略，并且整个表达式返回nil
+let badStu : Student? = Student(score: 59, school: "xueyuan", name: "badStu")
+let  badScore = badStu?.score
+print("badStu score is \(badScore)") //badStu score is Optional(59.0)
+
+
+
+
 // ----------------------枚举和结构体（Enumerations and Structures）----------------
+
+
+
+
+
+
+
+
+
+
+
+
 // ----------------------协议和扩展（Protocols and Extensions）----------------
 // ----------------------错误处理（Error Handling）----------------
 // ----------------------泛型（Generics）----------------
