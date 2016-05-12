@@ -450,7 +450,54 @@ case let .Failure(message):
 }
 
 
-
 // ----------------------协议和扩展（Protocols and Extensions）----------------
+
+// 1.使用protocol来声明一个协议。
+protocol ExampleProtcol {
+    var simpleDescription : String { get }
+    mutating func adjust()
+}
+
+// 2.使用protocol来声明一个协议
+class SimpleClass: ExampleProtcol {
+    var simpleDescription: String = "A very simple class."
+    var anotherProperty: Int = 69105
+    func adjust() {
+        simpleDescription += "  Now 100% adjusted."
+    }
+}
+var a = SimpleClass()
+a.adjust()
+let aDescription = a.simpleDescription
+print(aDescription) //A very simple class.  Now 100% adjusted.
+
+struct SimpleStructure: ExampleProtcol {
+    var simpleDescription: String = "A simple structure"
+    mutating func adjust() {
+        simpleDescription += " (adjusted)"
+    }
+}
+var b = SimpleStructure()
+b.adjust()
+let bDescription = b.simpleDescription
+print(bDescription) //A simple structure (adjusted)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // ----------------------错误处理（Error Handling）----------------
 // ----------------------泛型（Generics）----------------
