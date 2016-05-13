@@ -450,53 +450,62 @@ case let .Failure(message):
 }
 
 
+
 // ----------------------协议和扩展（Protocols and Extensions）----------------
 
 // 1.使用protocol来声明一个协议。
 protocol ExampleProtcol {
-    var simpleDescription : String { get }
-    mutating func adjust()
+    var userName : String { get }
+    mutating func clickButtonAtIndex(index: Int)
 }
 
-// 2.使用protocol来声明一个协议
-class SimpleClass: ExampleProtcol {
-    var simpleDescription: String = "A very simple class."
-    var anotherProperty: Int = 69105
-    func adjust() {
-        simpleDescription += "  Now 100% adjusted."
+// 2.类、枚举和结构体都可以实现协议
+class ExampleClass : ExampleProtcol {
+    var userName: String = "Xcoder"
+    func clickButtonAtIndex(index: Int) {
+        print("\(userName)点击了第\(index)个按钮")
     }
 }
-var a = SimpleClass()
-a.adjust()
-let aDescription = a.simpleDescription
-print(aDescription) //A very simple class.  Now 100% adjusted.
 
-struct SimpleStructure: ExampleProtcol {
-    var simpleDescription: String = "A simple structure"
-    mutating func adjust() {
-        simpleDescription += " (adjusted)"
+var classObj = ExampleClass()
+// 触发代理方法
+classObj.clickButtonAtIndex(3) //Xcoder点击了第3个按钮
+print(classObj.userName)  //Xcoder
+
+
+// 3.结构体实现协议
+struct ExampleStruct : ExampleProtcol {
+    var userName: String = "Xcoder1"
+    // mutating关键字用来 标记 一个会修改结构体的方法
+    // 类的声明不需要标记任何方法 , 因为类中的方法通常可以修改类属性（类的性质）
+    mutating func clickButtonAtIndex(index: Int) {
+        print("\(userName)点击了第\(index)个按钮")
     }
 }
-var b = SimpleStructure()
-b.adjust()
-let bDescription = b.simpleDescription
-print(bDescription) //A simple structure (adjusted)
+
+var structObj = ExampleStruct()
+// 触发代理方法
+structObj.clickButtonAtIndex(4) //Xcoder1点击了第4个按钮
+print(structObj.userName)  //Xcoder1
 
 
+// 4. 使用 extension 来为现有的类型添加功能，比如新的 方法 和 属性
+protocol ExtensionProtocol {
+    var stringLength : Int {get}
+    mutating func caculateStringLength() -> Int
+}
 
+extension String : ExtensionProtocol {
+    var stringLength : Int {
+        return self.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)
+    }
+     func caculateStringLength() -> Int {
+        return self.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)
+    }
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
+print("Hello中国".stringLength) //11
+print("Hello".caculateStringLength()) //5
 
 
 // ----------------------错误处理（Error Handling）----------------
