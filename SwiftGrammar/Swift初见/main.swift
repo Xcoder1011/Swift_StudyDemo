@@ -509,4 +509,64 @@ print("Hello".caculateStringLength()) //5
 
 
 // ----------------------错误处理（Error Handling）----------------
+
+// 1.采用 ErrorType协议 的类型来表示错误
+enum PrintError: ErrorType {
+    case OutOfPaper
+    case NoPaper
+    case OnFire
+}
+
+// 使用 throws 来表示一个可以抛出错误的函数
+func sendPrinter(printerName:String) throws -> String {
+    if printerName == "Out of Paper" {
+        //使用throw来抛出一个错误
+        throw PrintError.OutOfPaper
+    }
+    return "没匹配到错误"
+}
+
+// 2.错误处理
+// 一种方式是使用 do-catch
+do {
+    // 使用try来标记可以抛出错误的代码
+    let printResponse = try sendPrinter("Out of Paper")
+    print(printResponse)    //OutOfPaper
+} catch {
+    //在catch代码块中，除非另外命名，否则错误会自动命名为error。
+    print(error)
+}
+
+// 可以使用多个catch块来处理特定的错误
+do {
+    let printResponse = try sendPrinter("Out of Paper")
+    print(printResponse)
+} catch PrintError.OnFire {
+    print("rest of the fire")
+}catch let printError as PrintError {
+    print("Print error: \(printError)") //Print error: OutOfPaper
+}catch {
+    print(error)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // ----------------------泛型（Generics）----------------
