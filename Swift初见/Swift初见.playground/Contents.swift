@@ -1,11 +1,5 @@
- //
-//  main.swift
-//  Swift初见
-//
-//  Created by wushangkun on 16/5/10.
-//  Copyright © 2016年 wushangkun. All rights reserved.
-//
 
+import UIKit
 import Foundation
 
 // ---------------------- 简单值（Simple Values）----------------
@@ -29,6 +23,17 @@ let total1 = label + String(width)
 let total2 = label + "\(width+1)"
 print("\(total1) , \(total2)")    // The width is 94 , The width is 95
 
+// swift 4.0 后新增
+// 使用一对三个单引号（"""）来包含多行字符串内容，字符串中的内容（包括引号、空格、换行符等）都会保留下来
+let multiString =
+    
+"""
+宽度是\(width) 厘米,
+
+The width is "\(width)" cm
+
+"""
+
 
 // 5.使用方括号[]来创建数组和字典，并使用下标或者键（key）来访问元素。最后一个元素后面允许有个逗号。
 var shoppingList = ["apple","orange","banana"]
@@ -38,7 +43,7 @@ var jsonDict = [
     "errorCode" : "0",
     "errorMessage" : "网络不给力",
 ]
-print(jsonDict["errorMessage"])
+print(jsonDict["errorMessage"] ?? "")
 
 
 // 5.1要创建一个空数组或者字典，使用初始化语法。
@@ -58,7 +63,7 @@ jsonDict = [:]
 let scores = [75, 56, 98, 67, 55]
 var passNum = 0
 for score in scores{
-
+    
     if score >= 60{
         passNum += 1;
     }
@@ -110,10 +115,10 @@ let interestingNumbers = [
     "Square": [1, 4, 9, 16, 25],
 ]
 var largest = 0
-for(k,v) in interestingNumbers {
+for(_,v) in interestingNumbers {
     for num in v {
         if num > largest {
-        largest = num
+            largest = num
         }
     }
 }
@@ -150,47 +155,82 @@ print(m)
 
 // 1.使用func来声明一个函数 , 使用func来声明一个函数
 func loginAct(userName:String , passWord:String) -> (Bool){
-
-    if passWord.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) >= 6 {
+    if passWord.lengthOfBytes(using: String.Encoding.utf8) >= 8 {
         return true
-    }else{
+    } else{
         return false
     }
 }
 // 调用loginAct方法
-loginAct("wushangkun", passWord: "123456")
+loginAct(userName: "wushangkun", passWord: "123456")
+
+// 注意 ： 可以使用 _ 表示不使用参数标签
+func login(_ name: String, password: String) -> Bool {
+    if password.lengthOfBytes(using: String.Encoding.utf8) >= 8 {
+        return true
+    } else{
+        return false
+    }
+}
+login("Mr.Wu", password: "6666")
 
 
 // 2.函数可以带有可变个数的参数，这些参数在函数内表现为数组的形式
-func sumof(numArray:Int...) -> Int {
+
+func sumof(_ numArray:Int...) ->Int {
+    
     var sum = 0
     for num in numArray {
         sum += num
     }
-    print("sum = \(sum)") //sum = 15
+    print("sum = \(sum)")
     return sum
 }
-sumof(2,3,4,6)
+sumof(1,2,3,4,5)
+
+// 注意: 使用元组来生成复合值，让一个函数返回多个值。
+func caculateNums(scores:[Int]) -> (min:Int, max:Int, sum:Int) {
+    var min = scores[0]
+    var max = scores[0]
+    var sum = 0
+    
+    for score in scores {
+        if score > max {
+            max = score
+        } else if score < min {
+            min = score
+        }
+        
+        sum += score
+    }
+    
+    return (min, max, sum)
+}
+
+let result = caculateNums(scores: [78, 99, 80, 90])
+print(result.max)
+print(result.sum)
 
 
 // 3.函数可以嵌套
-// 被嵌套的函数可以访问外侧函数的变量，你可以使用嵌套函数来重构一个太长或者太复杂的函数
+// 被嵌套的函数可以访问外侧函数的变量，可以使用嵌套函数来重构一个太长或者太复杂的函数
+
 func returnFifteen() -> Int {
-    var  y = 10
+    var y = 10
     func add(){
-        //被嵌套的函数可以访问外侧函数的变量y
+        // 被嵌套的函数可以访问外侧函数的变量y
         y += 5
     }
-    add()
+    add();
     return y
 }
 returnFifteen()
 
 
-// 4.函数是第一等类型，这意味着函数可以作为另一个函数的返回值。
+// 4.函数是第一等类型， 函数可以作为另一个函数的返回值。
 func makeIncrementer() -> (Int -> Int) {
     func addOne(num:Int) -> Int {
-         return num + 1
+        return num + 1
     }
     //addOne函数 作为 makeIncrementer函数 的返回值。
     return addOne
@@ -251,7 +291,7 @@ class People {
     
     // 一个构造函数来初始化类实例。使用init来创建一个构造器
     init (name : String) {  //通过构造器属性赋值
-      self.name = name
+        self.name = name
     }
     
     //如果你需要在删除对象之前进行一些清理工作，使用deinit创建一个析构函数。
@@ -272,7 +312,7 @@ print(name)  //people Name : wushangkun
 
 // 3.子类的定义方法是在它们的类名后面加上父类的名字，用冒号分割
 class Student : People {
-
+    
     var school : String
     var score : Double
     
@@ -287,7 +327,7 @@ class Student : People {
     }
     //子类如果要重写父类的方法的话，需要用override标记
     override func readName() -> String {
-    return "student Name : \(self.name)"
+        return "student Name : \(self.name)"
     }
 }
 
@@ -309,7 +349,7 @@ class GoodStudent : People {
     var  mathScore : Double
     var  physicScore : Double
     var  score : Double
-
+    
     init(mathScore: Double, physicScore:Double, name: String ,score:Double) {
         self.mathScore = mathScore
         self.physicScore = physicScore
@@ -499,7 +539,7 @@ extension String : ExtensionProtocol {
     var stringLength : Int {
         return self.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)
     }
-     func caculateStringLength() -> Int {
+    func caculateStringLength() -> Int {
         return self.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)
     }
 }

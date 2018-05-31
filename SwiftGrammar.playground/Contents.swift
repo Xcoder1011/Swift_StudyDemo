@@ -30,14 +30,12 @@ print(j)
 
 
 
-// 常量&变量的使用原则：尽量先用 let，只有需要变的时候，再用 var，能够更加安全
-
 /******************************************************/
 
 // 变量类型
 let num = 10
 print(num)
-// 自动类型推导  NSArray *arr = [NSMutalbeArray array];
+// 自动类型推导
 let value = 10.10
 print(value)
 
@@ -49,7 +47,6 @@ print(Double(num) + dValue)
 print(num + Int(value))
 
 
-
 /*
 在Swift中值"永远不会"被隐式转换为其他类型, 必须显示转换
 Swift中整数默认是Int64  == long
@@ -57,6 +54,10 @@ Swift中小数默认是Double
 */
 let sum = Double(num) + value
 print(sum)
+
+let label = "The width is"
+let width = 5
+let labelwidth = label + String(5)
 
 let size = CGSize(width: 10, height: 10)
 // Double和CGFloat也需要转换
@@ -72,19 +73,19 @@ Swift:  (xxx:)
 
 调用方法
 OC:     [UIColor redColor];
-Swift   UIColor.redColor()
+Swift   UIColor.red
 
 枚举
 OC:      UIButtonTypeContactAdd
-Swift:   UIButtonType.ContactAdd
+Swift:   UIButtonType.contactAdd
 */
 
 
-// 使用 let 修饰 v 并且赋值，表示 该常量的内存地址不允许修改，但是可以修改其内部的属性
-let view = UIView(frame: CGRectMake(0, 0, 100, 100))
-view.backgroundColor = UIColor.redColor()
+// 使用 let 修饰并且赋值，表示 该常量的内存地址不允许修改，但是可以修改其内部的属性
+let view = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+view.backgroundColor = UIColor.red
 
-let btn = UIButton(type: UIButtonType.ContactAdd)
+let btn = UIButton(type: UIButtonType.contactAdd)
 btn.center = CGPoint(x: 50, y: 50)
 view.addSubview(btn)
 
@@ -149,34 +150,30 @@ print(result)
 */
 
 
-let url = NSURL(string: "http://www.baidu.com/")
-let url2 = NSURL(string: "http://www.baidu.com/")
-
-// 1. 需要考虑url是否有值
-if url != nil{
-    let request = NSURLRequest(URL: url!)
+let url2 = URL(string: "http://www.baidu.com/")
+// 1. 需要考虑url2是否有值
+if url2 != nil{
+    let request2 = URLRequest(url: url2!)
 }
 
 // 2. 不需要考虑url3是否有值, 能进入{}一定有值
-if let url3 = NSURL(string: "http://www.baidu.com/"){
-    let request = NSURLRequest(URL: url3)
+if let url3 = URL(string: "http://www.baidu.com/"){
+    let request3 = URLRequest(url: url3)
 }
 
 // 总结:
 // 1. 使用 if let 常量 = 可选构造函数 的方式能够确保分支内部常量是一定有值的 , 在分支内部不再需要使用! (重要使用技巧)
 
 
-
-
 // 练习
 var name : String?
-print(name?.lengthOfBytesUsingEncoding(NSUTF8StringEncoding))
+print(name?.lengthOfBytes(using: String.Encoding.utf8))
 
 name = "Xcoder"
-print(name?.lengthOfBytesUsingEncoding(NSUTF8StringEncoding))
+print(name?.lengthOfBytes(using: String.Encoding.utf8))
 
 let constValue = 10
-print(constValue + (name?.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) ?? 0) )
+print(constValue + (name?.lengthOfBytes(using: String.Encoding.utf8) ?? 0) )
 
 // 总结:
 // 1. ?? 是一个非常有用的操作符，能够快速对 nil 进行判断
@@ -193,16 +190,19 @@ OC传统写法:
 >i没有类型, 使用的是var
 */
 
-for var index = 0; index < 10; index++
-{
-    print(index)
-}
+
+//for var index = 0; index < 10; index++
+//{
+//    print(index)
+//}
+//
+//
+//for var i = 0; i < 10; i++
+//{
+//    print(i)
+//}
 
 
-for var i = 0; i < 10; i++
-{
-    print(i)
-}
 
 
 /*
