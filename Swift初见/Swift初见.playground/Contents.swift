@@ -228,20 +228,24 @@ returnFifteen()
 
 
 // 4.函数是第一等类型， 函数可以作为另一个函数的返回值。
-func makeIncrementer() -> (Int -> Int) {
+
+func makeIncementer(n:Int) -> ((Int) -> Int) {
+    
     func addOne(num:Int) -> Int {
         return num + 1
     }
-    //addOne函数 作为 makeIncrementer函数 的返回值。
+    // addOne函数 作为 makeIncrementer函数 的返回值。
     return addOne
 }
-var increment = makeIncrementer()
-print("increment(5) = \(increment(5))") //increment(5) = 6
+var increment = makeIncementer(n: 3)
 
 
 // 5.函数也可以当做参数传入另一个函数
-func hasSmallNum(numArray:[Int] , condition: Int -> Bool) -> Bool {
+
+func hasSmallNum(numArray:[Int], condition: (Int) -> Bool) -> Bool {
+    
     for num in numArray {
+        
         if condition(num) {
             return true
         }
@@ -249,35 +253,38 @@ func hasSmallNum(numArray:[Int] , condition: Int -> Bool) -> Bool {
     return false
 }
 
-func lessThanTen(num: Int) -> Bool {
+func lessThanTen(num:Int) -> Bool {
     return num < 10
 }
 
-var numbers = [12, 8, 3, 45, 23]
+var numbers = [12, 3, 8, 34];
 //lessThanTen函数 当做 参数 传入 hasSmallNum函数 ！！！
-hasSmallNum(numbers, condition: lessThanTen)
+hasSmallNum(numArray: numbers, condition: lessThanTen)
 
 
-// 6.函数实际上是一种特殊的闭包:它是一段能之后被调取的代码
-let mappedNumbers = numbers.map({
-    // 可以使用{}来创建一个匿名闭包。使用in将参数和返回值类型声明与闭包函数体进行分离
-    (number: Int) -> Int in
-    let result = 3 * number
+// 6.函数实际上是一种特殊的闭包: 使用 {} 来创建一个匿名闭包
+
+let mappedNumbers = numbers.map { (num:Int) -> Int in
+    // 使用 in 将参数和返回值类型的声明与闭包函数体进行分离
+    let result = 3 * num
     return result
-})
-print(mappedNumbers) // [36, 24, 9, 135, 69]
-
+}
+print(mappedNumbers)
 
 // 6.1 如果一个闭包的类型已知，比如作为一个回调函数,
 // 可以忽略参数的类型和返回值。单个语句闭包会把它语句的值当做结果返回。
-let mapNumbers = numbers.map({num in num * 3})
-print(mapNumbers)  //[36, 24, 9, 135, 69]
 
+let mapNums = numbers.map { num  in
+    num * 3
+}
+print(mapNums)
 
 // 6.2 对数组里的元素从小到大排序
-// 当一个闭包是传给函数的唯一参数，可以完全忽略括号
-let sortedNumbers = numbers.sort{ $0 < $1}
+let sortedNumbers = numbers.sorted { (n1, n2) -> Bool in
+    return n1 > n2
+}
 print(sortedNumbers)
+
 
 
 
@@ -301,7 +308,9 @@ class People {
     }
 }
 
+
 // 2.要创建一个类的实例，在类名后面加上括号
+
 var people = People(name : "")
 people.age = 18
 people.name = "wushangkun"
@@ -311,6 +320,7 @@ print(name)  //people Name : wushangkun
 
 
 // 3.子类的定义方法是在它们的类名后面加上父类的名字，用冒号分割
+
 class Student : People {
     
     var school : String
@@ -325,16 +335,16 @@ class Student : People {
     func readSchool(school:String) -> String {
         return "student school: \(school)"
     }
-    //子类如果要重写父类的方法的话，需要用override标记
+    // 子类如果要重写父类的方法的话，需要用override标记
     override func readName() -> String {
         return "student Name : \(self.name)"
     }
 }
 
 let testStu = Student(score: 9.0 , school: "FUDAN" , name: "zhangsan")
-print( testStu.school )  //FUDAN
-print( testStu.readSchool("QINGHUA") )  //student school: QINGHUA
-print( testStu.readName() ) //student Name : zhangsan
+print( testStu.school )
+print(testStu.readSchool(school: "QINGHUA"))
+print( testStu.readName() )
 
 
 // 4.函数除了储存简单的属性之外，属性可以有 getter 和 setter
@@ -346,78 +356,64 @@ print( testStu.readName() ) //student Name : zhangsan
  */
 class GoodStudent : People {
     
-    var  mathScore : Double
-    var  physicScore : Double
-    var  score : Double
+    var mathScore : Double
+    var physicScore : Double {
+        
+        // 使用 willSet 和 didSet 来监视属性的除初始化之外的属性值变化
+        
+        willSet {
+            print("physicScore will set an new value \(newValue)")
+        }
+        
+        didSet {
+            
+            print("physicScore did changed from \(oldValue) to \(physicScore)")
+            
+            if physicScore < 60 {
+                print("不及格")
+            } else {
+                print("及格")
+            }
+        }
+        
+    }
     
-    init(mathScore: Double, physicScore:Double, name: String ,score:Double) {
+    init(mathScore:Double, physicScore:Double, name:String) {
         self.mathScore = mathScore
         self.physicScore = physicScore
-        self.score = score
         super.init(name: name)
     }
-    // 属性: 平均成绩
-    var averageScore : Double {
+    
+    var avarageScore : Double {
         get {
-            return (mathScore + physicScore)/2
+            return(mathScore + physicScore) / 2.0
         }
         set {
+            // 新值的名字是 newValue。可以在 set 之后显式的设置一个名字
             mathScore = newValue
             physicScore = newValue
         }
     }
+    
 }
 
-let testGood = GoodStudent(mathScore: 96,physicScore: 97,name: "lisi" ,score: 88)
-// get
-print("\(testGood.name).averageScore is \(testGood.averageScore)") //lisi.averageScore is 96.5
-// set
-testGood.averageScore = 50
-print("\(testGood.name).physicScore is \(testGood.physicScore)") //lisi.physicScore is 50.0
-
-
-
-// 5.如果不需要计算属性，但是仍然需要在设置一个新值之前或者之后运行代码，使用 willSet 和 didSet
-class WinnerStudent {
-    
-    var  stu : Student {
-        willSet {
-            stu.score = newValue.score
-        }
-    }
-    
-    var goodStu : GoodStudent {
-        willSet {
-            goodStu.score = newValue.score
-        }
-    }
-    init(score: Double , school: String, name:String) {
-        stu = Student(score: score, school: school, name: name)
-        goodStu = GoodStudent(mathScore: score+1, physicScore: score-1, name: name, score: score)
-    }
-}
-
-var winnerStudent = WinnerStudent(score: 100, school: "JIAODA", name: "wangwu")
-// get
-print("winnerStudent.stu.score is \(winnerStudent.stu.score)") //winnerStudent.stu.score is 100.0
-print("winnerStudent.goodStu.score is \(winnerStudent.goodStu.score)") //winnerStudent.goodStu.score is 100.0
-
-// set
-winnerStudent.stu = Student(score: 99, school: "JIAODA1", name: "wangwu1")
-print("winnerStudent.goodStu.score is \(winnerStudent.goodStu.score)") //winnerStudent.goodStu.score is 100.0
+let testGood = GoodStudent(mathScore: 98, physicScore: 90, name: "lisi")
+testGood.avarageScore = 94
+print("\(testGood.name) avarageScore is \(testGood.avarageScore)")
 
 
 // 6.处理变量的可选值时，可以在操作（比如方法、属性和子脚本）之前加?
 // 如果?之前的值是nil，?后面的东西都会被忽略，并且整个表达式返回nil
-let badStu : Student? = Student(score: 59, school: "xueyuan", name: "badStu")
-let  badScore = badStu?.score
-print("badStu score is \(badScore)") //badStu score is Optional(59.0)
+ 
+let badStu : Student? = Student(score: 40, school: "moumou", name: "xiaohua")
+let badSocre = badStu?.score
 
 
 
 // ----------------------枚举和结构体（Enumerations and Structures）----------------
 
 // 1.使用enum来创建一个枚举 , 枚举可以包含方法
+
 enum Rank:Int {
     // 默认情况下，Swift 按照从 0 开始每次加 1 的方式为原始值进行赋值，
     // 不过也可以通过显式赋值进行改变
@@ -427,6 +423,7 @@ enum Rank:Int {
     
     func simpleDescription() -> String {
         switch self {
+            
         case .Ace:
             return "这是扑克牌里的A"
         case .Jack:
@@ -436,6 +433,7 @@ enum Rank:Int {
         case .King:
             return "这是扑克牌里的K"
         default:
+            // 使用rawValue属性来访问一个枚举成员的原始值
             return String(self.rawValue)
         }
     }
@@ -445,7 +443,8 @@ let aceValue = A.rawValue  // 1
 print("aceValue is \(aceValue)")  //aceValue is 1
 
 
-// 2.使用rawValue属性来访问一个枚举成员的原始值
+// 2.使用 init?(rawValue:) 初始化带有原始值的枚举成员
+
 if let convertRank = Rank(rawValue: 13) {
     let threeteenDes = convertRank.simpleDescription()
     print(threeteenDes)  // 这是扑克牌里的K
@@ -457,12 +456,14 @@ if let convertRank = Rank(rawValue: 13) {
 
 
 // 3. 使用 struct 来创建一个 结构体
+
 struct Card {
     var rank : Rank
     func simpleDescription() -> String {
         return "请出牌：\(rank.simpleDescription())"
     }
 }
+
 let sixCard = Card(rank: .Six)
 print(sixCard.simpleDescription())  // 请出牌：6
 /*
@@ -487,6 +488,7 @@ case let .Result(sunrise, sunset):
     
 case let .Failure(message):
     print("Failure...  \(message)")
+    
 }
 
 
@@ -499,13 +501,23 @@ protocol ExampleProtcol {
     mutating func clickButtonAtIndex(index: Int)
 }
 
-// 2.类、枚举和结构体都可以实现协议
+
+protocol CustomViewProtocol {
+    
+    mutating func clickButtonAtIndex(index: Int)
+}
+
+// 2.类、枚举和结构体都可以遵循协议
 class ExampleClass : ExampleProtcol {
     var userName: String = "Xcoder"
     func clickButtonAtIndex(index: Int) {
         print("\(userName)点击了第\(index)个按钮")
     }
 }
+
+
+class ExampleClass1 : 
+
 
 var classObj = ExampleClass()
 // 触发代理方法
@@ -546,6 +558,9 @@ extension String : ExtensionProtocol {
 
 print("Hello中国".stringLength) //11
 print("Hello".caculateStringLength()) //5
+
+
+/*
 
 
 // ----------------------错误处理（Error Handling）----------------
@@ -599,7 +614,7 @@ do {
 
 
 
-
+*/
 
 
 
