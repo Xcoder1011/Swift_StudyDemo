@@ -495,40 +495,34 @@ case let .Failure(message):
 
 // ----------------------协议和扩展（Protocols and Extensions）----------------
 
+
 // 1.使用protocol来声明一个协议。
-protocol ExampleProtcol {
+protocol CustomViewProtocol {
     var userName : String { get }
     mutating func clickButtonAtIndex(index: Int)
 }
 
 
-protocol CustomViewProtocol {
-    
-    mutating func clickButtonAtIndex(index: Int)
-}
-
 // 2.类、枚举和结构体都可以遵循协议
-class ExampleClass : ExampleProtcol {
-    var userName: String = "Xcoder"
+class ExampleClass : CustomViewProtocol {
+    var userName: String = "Xcoder1011"
+    var anotherProperty: String = "类"
+    
     func clickButtonAtIndex(index: Int) {
         print("\(userName)点击了第\(index)个按钮")
     }
 }
 
 
-class ExampleClass1 : 
-
-
 var classObj = ExampleClass()
-// 触发代理方法
-classObj.clickButtonAtIndex(3) //Xcoder点击了第3个按钮
-print(classObj.userName)  //Xcoder
+classObj.clickButtonAtIndex(index: 3) // Xcoder1011点击了第3个按钮
+print(classObj.userName)  // Xcoder1011
 
 
 // 3.结构体实现协议
-struct ExampleStruct : ExampleProtcol {
+struct ExampleStruct : CustomViewProtocol {
     var userName: String = "Xcoder1"
-    // mutating关键字用来 标记 一个会修改结构体的方法
+    // mutating !! 关键字用来 标记 一个会修改结构体的方法
     // 类的声明不需要标记任何方法 , 因为类中的方法通常可以修改类属性（类的性质）
     mutating func clickButtonAtIndex(index: Int) {
         print("\(userName)点击了第\(index)个按钮")
@@ -537,7 +531,7 @@ struct ExampleStruct : ExampleProtcol {
 
 var structObj = ExampleStruct()
 // 触发代理方法
-structObj.clickButtonAtIndex(4) //Xcoder1点击了第4个按钮
+structObj.clickButtonAtIndex(index: 4) //Xcoder1点击了第4个按钮
 print(structObj.userName)  //Xcoder1
 
 
@@ -548,25 +542,26 @@ protocol ExtensionProtocol {
 }
 
 extension String : ExtensionProtocol {
+    
     var stringLength : Int {
-        return self.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)
+        return self.lengthOfBytes(using: String.Encoding.utf8)
     }
     func caculateStringLength() -> Int {
-        return self.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)
+        return self.lengthOfBytes(using: String.Encoding.utf8)
     }
 }
-
 print("Hello中国".stringLength) //11
 print("Hello".caculateStringLength()) //5
 
+let aStr : ExtensionProtocol = "testString"
+print(aStr.stringLength)
 
-/*
 
 
 // ----------------------错误处理（Error Handling）----------------
 
-// 1.采用 ErrorType协议 的类型来表示错误
-enum PrintError: ErrorType {
+// 1.采用 Error协议 的类型来表示错误
+enum PrintError: Error {
     case OutOfPaper
     case NoPaper
     case OnFire
@@ -582,11 +577,12 @@ func sendPrinter(printerName:String) throws -> String {
 }
 
 // 2.错误处理
+
 // 一种方式是使用 do-catch
 do {
     // 使用try来标记可以抛出错误的代码
-    let printResponse = try sendPrinter("Out of Paper")
-    print(printResponse)    //OutOfPaper
+    let printResponse = try sendPrinter(printerName: "Out of Paper")
+    print(printResponse)
 } catch {
     //在catch代码块中，除非另外命名，否则错误会自动命名为error。
     print(error)
@@ -594,8 +590,9 @@ do {
 
 // 可以使用多个catch块来处理特定的错误
 do {
-    let printResponse = try sendPrinter("Out of Paper")
+    let printResponse = try sendPrinter(printerName: "Out of Paper")
     print(printResponse)
+    
 } catch PrintError.OnFire {
     print("rest of the fire")
 }catch let printError as PrintError {
@@ -605,23 +602,69 @@ do {
 }
 
 
+// 另外一种方式是使用 try?
+let printerSuccess = try? sendPrinter(printerName: "Out of Paper") //如果函数抛出错误，该错误会被抛弃并且结果为 nil
+let printerFailure = try? sendPrinter(printerName: "Never Out of Paper") //否则，结果会是一个包含函数返回值的可选值
 
 
+// 3. defer 代码块 表示在函数返回前，函数中最后执行的代码
 
+var fridgeIsOpen = false
+let fridgeContent = ["milk", "egg", "potato"]
 
-
-
-
-
-
-*/
-
-
-
-
-
-
+func fridgeIsContain(_ food: String) -> Bool {
+    
+    fridgeIsOpen = true
+    
+    defer { // 无论函数是否会抛出错误，这段代码都将执行。
+        fridgeIsOpen = false
+        // 可以把函数调用之初就要执行的代码和函数调用结束时的扫尾代码写在一起
+    }
+    
+    let result = fridgeContent.contains(food)
+    return result
+}
 
 
 
 // ----------------------泛型（Generics）----------------
+
+// 1.尖括号 里写一个名字来创建一个泛型函数或者类型。
+func makeArray<Item> (numberOfTimes: Int, repeating : Item) -> [Item] {
+    var mArray = [Item]()
+    for _ in 0..<numberOfTimes {
+        mArray .append(repeating)
+    }
+    return mArray
+}
+makeArray(numberOfTimes: 10, repeating: "knock")
+
+
+// 2.创建泛型函数、方法、类、枚举和结构体。
+enum OptionalValue <Wrapped>{
+    case none
+    case some(Wrapped)
+}
+var possibleInt : OptionalValue <Int> = .none
+possibleInt = .some(100)
+
+
+// 3.类型名后面使用 where 来指定对类型的一系列需求
+// 比如，限定类型实现某一个协议，限定两个类型是相同的，或者限定某个类必须有一个特定的父类。
+
+func anyCommonElements <T:Sequence, U:Sequence> (_ lhs: T, _ rhs: U)  -> Bool
+
+    where T.Iterator.Element : Equatable, T.Iterator.Element == U.Iterator.Element {
+    
+        for lhsItem in lhs {
+            for rhsItem in rhs {
+                if lhsItem == rhsItem {
+                    return true
+                }
+            }
+        }
+        
+        return false
+}
+
+anyCommonElements([1,2,3], [2,3])
