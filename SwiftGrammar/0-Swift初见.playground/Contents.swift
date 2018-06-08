@@ -579,6 +579,18 @@ func sendPrinter(printerName:String) throws -> String {
 // 2.错误处理
 
 // 一种方式是使用 do-catch
+
+func canThrowAnError() throws {
+    // 这个函数有可能抛出错误
+}
+do {
+    try canThrowAnError()
+    // 没有错误消息抛出
+} catch {
+    // 有一个错误消息抛出
+}
+
+
 do {
     // 使用try来标记可以抛出错误的代码
     let printResponse = try sendPrinter(printerName: "Out of Paper")
