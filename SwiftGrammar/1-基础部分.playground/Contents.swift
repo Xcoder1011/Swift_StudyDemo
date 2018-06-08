@@ -186,9 +186,6 @@ if convertedNum != nil {
 
 
 // 4.可选绑定
-if let num = convertedNum {
-    
-}
 
 if let num = Int(possibleNum) {
     // 如果转换成功，num 常量可以在 if 语句的第一个分支中使用。
@@ -281,13 +278,13 @@ let count = names.count
 
 // 2.闭区间运算符  (a...b)  :从 a 到 b（包括 a 和 b）的所有值的区间。
 
-for index in 0...count-1 {
+for i in 0...count-1 {
     print("第 \(i + 1) 个人叫 \(names[i])")
 }
 
 // 3.半开区间运算符  (a..<b)  :从 a 到 b（包括 a 但是不包括b）的所有值的区间。
 
-for index in 0..<count {
+for i in 0..<count {
     print("第 \(i + 1) 个人叫 \(names[i])")
 }
 
