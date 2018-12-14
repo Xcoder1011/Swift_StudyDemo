@@ -281,7 +281,7 @@ print(mapNums)
 
 // 6.2 对数组里的元素从小到大排序
 let sortedNumbers = numbers.sorted { (n1, n2) -> Bool in
-    return n1 > n2
+    return n1 < n2
 }
 print(sortedNumbers)
 
@@ -466,6 +466,7 @@ struct Card {
 
 let sixCard = Card(rank: .Six)
 print(sixCard.simpleDescription())  // 请出牌：6
+
 /*
  * 结构体和类有很多相同的地方，比如方法和构造器
  * 它们之间最大的一个区别就是 结构体是传值 ，类是传引用
@@ -512,7 +513,6 @@ class ExampleClass : CustomViewProtocol {
         print("\(userName)点击了第\(index)个按钮")
     }
 }
-
 
 var classObj = ExampleClass()
 classObj.clickButtonAtIndex(index: 3) // Xcoder1011点击了第3个按钮
@@ -596,7 +596,7 @@ do {
     let printResponse = try sendPrinter(printerName: "Out of Paper")
     print(printResponse)
 } catch {
-    //在catch代码块中，除非另外命名，否则错误会自动命名为error。
+    // 在catch代码块中，除非另外命名，否则错误会自动命名为error。
     print(error)
 }
 

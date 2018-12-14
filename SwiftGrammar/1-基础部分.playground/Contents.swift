@@ -178,7 +178,7 @@ var surveyAnswer :String?
 // 3.可选值的强制解析
 let possibleNum = "23"
 let convertedNum = Int(possibleNum)
-print(convertedNum as Any)   //"Optional(4567)"
+print(convertedNum as Any)   //"Optional(23)"
 
 if convertedNum != nil {
     print("convertedNum has an integer value of \(convertedNum!)") //当确定可选类型确实包含值, 可以在可选的名字后面加一个感叹号（!）来获取值
@@ -258,12 +258,13 @@ if age > 0 {
  *
  */
 
-// 1.三元运算符   (问题 ? 答案 1 : 答案 2)
+// 1.1 三元运算符   (问题 ? 答案 1 : 答案 2)
 
-// 2.空合运算符  (a ?? b)
+// 1.2 空合运算符  (a ?? b)
 
 // a != nil ? a! : b
 // 表达式 a 必须是 Optional 类型。
+// 对可选类型 a 进行空判断，如果 a 包含一个值就进行解封，否则就返回一个默认值 b
 
 let defaultColorName = "red"
 var userDefinedColorName: String?   //默认值为 nil
