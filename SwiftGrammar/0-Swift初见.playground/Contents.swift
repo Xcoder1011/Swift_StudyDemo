@@ -522,9 +522,10 @@ print(classObj.userName)  // Xcoder1011
 // 3.结构体实现协议
 struct ExampleStruct : CustomViewProtocol {
     var userName: String = "Xcoder1"
-    // mutating !! 关键字用来 标记 一个会修改结构体的方法
+    // mutating !! 关键字用来 标记 一个会修改结构（包括属性）的方法
     // 类的声明不需要标记任何方法 , 因为类中的方法通常可以修改类属性（类的性质）
     mutating func clickButtonAtIndex(index: Int) {
+        //userName = "Xcoder1_new"
         print("\(userName)点击了第\(index)个按钮")
     }
 }
