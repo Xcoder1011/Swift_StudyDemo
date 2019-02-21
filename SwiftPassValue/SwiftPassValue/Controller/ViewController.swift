@@ -9,7 +9,7 @@
 import UIKit
 
 
-class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSource {
+class ViewController: UIViewController {
 
     let cellID = "ViewCell"
 
@@ -19,12 +19,15 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         tableV.tableFooterView = UIView.init()
         tableV.delegate = self
         tableV.dataSource = self
-        self.view .addSubview(tableV)
+        view.addSubview(tableV)
         return tableV;
     }()
+    
     lazy var dataArray = [
         MainItem(className:"DelegateViewController", title:"1.代理传值"),
-        MainItem(className:"DelegateViewController", title:"2.闭包传值"),
+        MainItem(className:"ClosureViewController", title:"2.闭包传值"),
+        MainItem(className:"NotificationController", title:"3.通知传值"),
+        MainItem(className:"SingletonViewController", title:"4.单例传值"),
         ]
 
     override func viewDidLoad() {
@@ -39,7 +42,9 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         let vc = (cls as! UIViewController.Type).init()
         return vc
     }
-    
+}
+
+extension ViewController: UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataArray.count
@@ -58,9 +63,9 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item :MainItem = dataArray[indexPath.row]
-        NSLog("select = %@", item.title)
         tableView .deselectRow(at: indexPath, animated: true)
         let vc = controllerFromString(className:item.className)
+        vc.title = item.title
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

@@ -16,5 +16,16 @@ struct  MainItem{
 class MainModel: NSObject {
     var className :String?
     var title: String?
+}
 
+
+class CacheBean {
+    
+    var name: String?
+    var title: String?
+    var number: Int = 0
+    
+    /// 单例
+    static let shareInstance = CacheBean()
+    private init() {}
 }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		93D03A04DDF3ABAC4DE070A4 /* Pods_SwiftPassValue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B3ED2E00EB28F1B6A298DD8 /* Pods_SwiftPassValue.framework */; };
+		BC14FCD9221BD3E800B4EF5C /* PassValueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC14FCD8221BD3E800B4EF5C /* PassValueViewController.swift */; };
 		BCD3402821C68C36007603BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD3402721C68C36007603BC /* AppDelegate.swift */; };
 		BCD3402A21C68C36007603BC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD3402921C68C36007603BC /* ViewController.swift */; };
 		BCD3402D21C68C36007603BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCD3402B21C68C36007603BC /* Main.storyboard */; };
@@ -14,9 +16,19 @@
 		BCD3403221C68C36007603BC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCD3403021C68C36007603BC /* LaunchScreen.storyboard */; };
 		BCD3403E21C6A1F6007603BC /* DelegateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD3403D21C6A1F6007603BC /* DelegateViewController.swift */; };
 		BCD3404021C6A25A007603BC /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD3403F21C6A25A007603BC /* Model.swift */; };
+		BCE7FD9F221E82F0007706FC /* UIView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE7FD9E221E82F0007706FC /* UIView+extension.swift */; };
+		BCE7FDA1221E884A007706FC /* ClosureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE7FDA0221E884A007706FC /* ClosureViewController.swift */; };
+		BCE7FDA3221E9225007706FC /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE7FDA2221E9225007706FC /* NotificationController.swift */; };
+		BCE7FDA5221EA70E007706FC /* SingletonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE7FDA4221EA70E007706FC /* SingletonViewController.swift */; };
+		BCEB663321EF26AB002C352B /* BaseReceiveResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEB663221EF26AB002C352B /* BaseReceiveResultController.swift */; };
+		BCEB663621EF2C92002C352B /* PrefixHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEB663521EF2C92002C352B /* PrefixHeader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		26298D25E7361D9499EB6DA8 /* Pods-SwiftPassValue.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftPassValue.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftPassValue/Pods-SwiftPassValue.release.xcconfig"; sourceTree = "<group>"; };
+		455E27C1D19B9AD4AF241C57 /* Pods-SwiftPassValue.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftPassValue.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftPassValue/Pods-SwiftPassValue.debug.xcconfig"; sourceTree = "<group>"; };
+		7B3ED2E00EB28F1B6A298DD8 /* Pods_SwiftPassValue.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftPassValue.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BC14FCD8221BD3E800B4EF5C /* PassValueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassValueViewController.swift; sourceTree = "<group>"; };
 		BCD3402421C68C36007603BC /* SwiftPassValue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftPassValue.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCD3402721C68C36007603BC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BCD3402921C68C36007603BC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -26,6 +38,12 @@
 		BCD3403321C68C36007603BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BCD3403D21C6A1F6007603BC /* DelegateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateViewController.swift; sourceTree = "<group>"; };
 		BCD3403F21C6A25A007603BC /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		BCE7FD9E221E82F0007706FC /* UIView+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+extension.swift"; sourceTree = "<group>"; };
+		BCE7FDA0221E884A007706FC /* ClosureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosureViewController.swift; sourceTree = "<group>"; };
+		BCE7FDA2221E9225007706FC /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		BCE7FDA4221EA70E007706FC /* SingletonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingletonViewController.swift; sourceTree = "<group>"; };
+		BCEB663221EF26AB002C352B /* BaseReceiveResultController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseReceiveResultController.swift; sourceTree = "<group>"; };
+		BCEB663521EF2C92002C352B /* PrefixHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefixHeader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,17 +51,46 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93D03A04DDF3ABAC4DE070A4 /* Pods_SwiftPassValue.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		20A04497BFC61723C42CE7E0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				455E27C1D19B9AD4AF241C57 /* Pods-SwiftPassValue.debug.xcconfig */,
+				26298D25E7361D9499EB6DA8 /* Pods-SwiftPassValue.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		6B3F1A0C1CBFCFDDFE533F53 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7B3ED2E00EB28F1B6A298DD8 /* Pods_SwiftPassValue.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BC14FCD7221BD2E500B4EF5C /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				BCEB663221EF26AB002C352B /* BaseReceiveResultController.swift */,
+				BC14FCD8221BD3E800B4EF5C /* PassValueViewController.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		BCD3401B21C68C36007603BC = {
 			isa = PBXGroup;
 			children = (
 				BCD3402621C68C36007603BC /* SwiftPassValue */,
 				BCD3402521C68C36007603BC /* Products */,
+				20A04497BFC61723C42CE7E0 /* Pods */,
+				6B3F1A0C1CBFCFDDFE533F53 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -59,9 +106,10 @@
 			isa = PBXGroup;
 			children = (
 				BCD3402721C68C36007603BC /* AppDelegate.swift */,
+				BCD3403A21C691A0007603BC /* Controller */,
 				BCD3403C21C691B5007603BC /* Model */,
 				BCD3403B21C691AC007603BC /* View */,
-				BCD3403A21C691A0007603BC /* Controller */,
+				BC14FCD7221BD2E500B4EF5C /* Common */,
 				BCD3403921C69183007603BC /* Other */,
 			);
 			path = SwiftPassValue;
@@ -74,6 +122,7 @@
 				BCD3402E21C68C36007603BC /* Assets.xcassets */,
 				BCD3403021C68C36007603BC /* LaunchScreen.storyboard */,
 				BCD3403321C68C36007603BC /* Info.plist */,
+				BCEB663521EF2C92002C352B /* PrefixHeader.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -83,6 +132,9 @@
 			children = (
 				BCD3402921C68C36007603BC /* ViewController.swift */,
 				BCD3403D21C6A1F6007603BC /* DelegateViewController.swift */,
+				BCE7FDA0221E884A007706FC /* ClosureViewController.swift */,
+				BCE7FDA2221E9225007706FC /* NotificationController.swift */,
+				BCE7FDA4221EA70E007706FC /* SingletonViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -90,6 +142,7 @@
 		BCD3403B21C691AC007603BC /* View */ = {
 			isa = PBXGroup;
 			children = (
+				BCE7FD9E221E82F0007706FC /* UIView+extension.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -109,9 +162,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BCD3403621C68C36007603BC /* Build configuration list for PBXNativeTarget "SwiftPassValue" */;
 			buildPhases = (
+				4BEFB9C29E90BD991C961EDC /* [CP] Check Pods Manifest.lock */,
 				BCD3402021C68C36007603BC /* Sources */,
 				BCD3402121C68C36007603BC /* Frameworks */,
 				BCD3402221C68C36007603BC /* Resources */,
+				B8B1AF9088B8E23881419C4F /* [CP] Embed Pods Frameworks */,
+				93FF4B062268E85086377B73 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -134,7 +190,7 @@
 				TargetAttributes = {
 					BCD3402321C68C36007603BC = {
 						CreatedOnToolsVersion = 9.0.1;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -169,15 +225,76 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4BEFB9C29E90BD991C961EDC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SwiftPassValue-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		93FF4B062268E85086377B73 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftPassValue/Pods-SwiftPassValue-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B8B1AF9088B8E23881419C4F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-SwiftPassValue/Pods-SwiftPassValue-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftPassValue/Pods-SwiftPassValue-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		BCD3402021C68C36007603BC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCE7FDA3221E9225007706FC /* NotificationController.swift in Sources */,
+				BCE7FDA1221E884A007706FC /* ClosureViewController.swift in Sources */,
+				BCE7FDA5221EA70E007706FC /* SingletonViewController.swift in Sources */,
+				BCEB663621EF2C92002C352B /* PrefixHeader.swift in Sources */,
+				BC14FCD9221BD3E800B4EF5C /* PassValueViewController.swift in Sources */,
+				BCE7FD9F221E82F0007706FC /* UIView+extension.swift in Sources */,
 				BCD3402A21C68C36007603BC /* ViewController.swift in Sources */,
 				BCD3402821C68C36007603BC /* AppDelegate.swift in Sources */,
 				BCD3403E21C6A1F6007603BC /* DelegateViewController.swift in Sources */,
 				BCD3404021C6A25A007603BC /* Model.swift in Sources */,
+				BCEB663321EF26AB002C352B /* BaseReceiveResultController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,13 +429,17 @@
 		};
 		BCD3403721C68C36007603BC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 455E27C1D19B9AD4AF241C57 /* Pods-SwiftPassValue.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = H9J886PZ98;
 				INFOPLIST_FILE = SwiftPassValue/Other/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.-wushangkun.SwiftPassValue";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "2227da1f-1ef0-4aa4-847e-046e00c8c9a7";
+				PROVISIONING_PROFILE_SPECIFIER = SC_Any_App;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -326,13 +447,16 @@
 		};
 		BCD3403821C68C36007603BC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 26298D25E7361D9499EB6DA8 /* Pods-SwiftPassValue.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SwiftPassValue/Other/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.-wushangkun.SwiftPassValue";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
