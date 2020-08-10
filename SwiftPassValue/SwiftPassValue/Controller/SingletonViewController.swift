@@ -18,7 +18,6 @@ class SingletonViewController: BaseReceiveResultController {
         super.viewWillAppear(animated)
         
         if let inputStr = CacheBean.shareInstance.name {
-            
             self.textView.text = "传过来的参数为：\(inputStr)"
         }
     }

@@ -15,6 +15,7 @@ import UIKit
 
 typealias PassValueBlock1 = (_ inputStr: String) -> ()
 typealias PassValueBlock2 = (String) -> ()
+typealias PassValueBlock3 = () -> ()
 
 class PassValueViewController: UIViewController {
     
@@ -22,6 +23,18 @@ class PassValueViewController: UIViewController {
     
     var passValueBlock1: PassValueBlock1?
     var passValueBlock2: PassValueBlock2?
+    
+    var passValueBlock3:(() -> ())?
+    var passValueBlock4:((Int) -> (Int))?
+    
+    var passValueBlock5:((Int) -> (Void)) = { a in } // 带初始化方式
+    var passValueBlock6:((Int) -> (Int)) = { a in // 带初始化方式
+        return 0
+    }
+
+    //返回值是一个函数指针，入参为String 返回值也是String
+    var passValueBlock7:((Int, Int) -> (String) -> String)?
+
     
     lazy var tf: UITextField = {
         let tf = UITextField.init(frame: .zero)
@@ -94,25 +107,23 @@ class PassValueViewController: UIViewController {
         }
         
         /****************************** 代理传值  ************************************/
-
-        if (delegate != nil) && (delegate?.responds(to: #selector(PassValueViewControllerDelegate.passValueDelegateMethod(inputStr:))))! {
-            
-            delegate?.passValueDelegateMethod(inputStr: text)
-        }
         
+        if let delegate = delegate {
+            if delegate.responds(to: #selector(PassValueViewControllerDelegate.passValueDelegateMethod(inputStr:))) {
+                delegate.passValueDelegateMethod(inputStr: text)
+            }
+        }
         
         /****************************** 闭包传值  ************************************/
 
         if let block = self.passValueBlock1 {
-          
             block(text)
         }
         
         if let block = self.passValueBlock2 {
-            
             block(text)
         }
-        
+     
         
         /****************************** 通知传值  ************************************/
         

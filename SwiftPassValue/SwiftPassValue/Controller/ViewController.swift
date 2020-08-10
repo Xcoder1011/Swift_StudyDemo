@@ -8,13 +8,12 @@
 
 import UIKit
 
-
 class ViewController: UIViewController {
 
     let cellID = "ViewCell"
 
     lazy var tableView :UITableView = {
-        var tableV = UITableView.init(frame: self.view.bounds, style: UITableViewStyle.plain)
+        let tableV = UITableView.init(frame: self.view.bounds, style: UITableViewStyle.plain)
         tableV .register(UITableViewCell.classForCoder(), forCellReuseIdentifier: cellID)
         tableV.tableFooterView = UIView.init()
         tableV.delegate = self
